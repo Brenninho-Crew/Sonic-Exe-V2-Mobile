@@ -32,14 +32,28 @@ jobs:
           haxelib install polymod
           haxelib install actuate
           haxelib git extension-webm https://github.com/KadeDev/extension-webm.git
+          
+          # Importante: Adicionar ao PATH
+          export PATH=~/haxelib/lime/run/bin:$PATH
+          export PATH=~/haxelib/openfl/run/bin:$PATH
+          
+          # Configurar Lime
           haxelib run lime setup
           haxelib run lime setup flixel
+          
+          # Verificar instalação
+          lime --version
           
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         
       - name: Compilar APK (Debug)
         run: |
+          # Garantir PATH novamente
+          export PATH=~/haxelib/lime/run/bin:$PATH
+          export PATH=~/haxelib/openfl/run/bin:$PATH
+          
+          # Compilar
           lime build android -debug
           
       - name: Upload APK
@@ -47,5 +61,4 @@ jobs:
         with:
           name: Sonic-Exe-V2-Android-Debug
           path: export/debug/android/bin/*.apk
-          compression-level: 0
           if-no-files-found: error
