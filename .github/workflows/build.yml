@@ -31,13 +31,12 @@ jobs:
           haxelib install hscript 2.5.1
           haxelib install polymod 1.8.0
           haxelib install actuate 1.9.1
+          haxelib install newgrounds 1.2.0
           haxelib git extension-webm https://github.com/KadeDev/extension-webm.git
-          
+
       - name: Configure Lime
         run: |
-          echo "$HOME/haxelib/lime/run/bin" >> $GITHUB_PATH
           haxelib run lime setup -y
-          haxelib run lime setup flixel -y
           lime --version
           
       - name: Setup Android SDK
